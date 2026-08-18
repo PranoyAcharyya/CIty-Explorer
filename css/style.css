@@ -1,0 +1,1433 @@
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+   /*
+ * IMPORTANT:
+ * When menu is open, body becomes fixed.
+ * This completely freezes the background page.
+ */
+
+body.menu-open {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 9999;
+
+      padding:
+        24px
+        48px;
+    }
+
+
+    .header-inner {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    /* =====================================================
+       LOGO
+    ====================================================== */
+
+    .logo {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      color: #111111;
+
+      text-decoration: none;
+
+      position: relative;
+
+      z-index: 10001;
+    }
+
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+
+      border: 1px solid #111111;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        transform 0.5s ease;
+    }
+
+
+    .logo:hover .logo-mark {
+      transform: rotate(45deg);
+    }
+
+
+    .logo-mark svg {
+      width: 21px;
+      height: 21px;
+    }
+
+
+    .logo-text {
+      display: flex;
+
+      flex-direction: column;
+
+      font-size: 16px;
+
+      line-height: 0.95;
+
+      font-weight: 700;
+
+      letter-spacing: -0.03em;
+    }
+
+
+    /* =====================================================
+       HEADER RIGHT
+    ====================================================== */
+
+    .header-actions {
+      display: flex;
+
+      align-items: center;
+
+      gap: 20px;
+
+      position: relative;
+
+      z-index: 10001;
+    }
+
+
+    /* =====================================================
+       LOGIN BUTTON
+    ====================================================== */
+
+    .login-button {
+      height: 48px;
+
+      padding:
+        0 24px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(0, 0, 0, 0.2);
+
+      border-radius: 999px;
+
+      color: #111111;
+
+      text-decoration: none;
+
+      font-size: 14px;
+
+      font-weight: 500;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+
+    .login-button:hover {
+      background: #111111;
+
+      border-color: #111111;
+
+      color: #ffffff;
+    }
+
+
+    /* =====================================================
+       BURGER BUTTON
+    ====================================================== */
+
+    .menu-toggle {
+      width: 52px;
+      height: 52px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: #111111;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      cursor: pointer;
+
+      position: relative;
+
+      z-index: 10001;
+
+      transition:
+        transform 0.3s ease;
+    }
+
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+    }
+
+
+    .burger-line {
+      display: block;
+
+      width: 21px;
+      height: 1.5px;
+
+      background: #ffffff;
+
+      transform-origin: center;
+    }
+
+
+    /* =====================================================
+   FULLSCREEN MENU
+===================================================== */
+
+.fullscreen-menu {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  z-index: 9998;
+
+  visibility: hidden;
+  pointer-events: none;
+
+  /*
+   * THIS is the important part.
+   * The menu itself gets the scrollbar.
+   */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /*
+   * Prevent scrolling from passing through
+   * to the underlying document.
+   */
+  overscroll-behavior: contain;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.fullscreen-menu::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =====================================================
+   MENU BACKGROUND
+===================================================== */
+
+.menu-bg {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #111111;
+
+  transform: translateY(-100%);
+}
+
+
+/* =====================================================
+   MENU CONTENT
+===================================================== */
+
+.menu-inner {
+  position: relative;
+
+  z-index: 2;
+
+  /*
+   * Don't use a fixed 100vh here.
+   * Let the content become taller than the viewport
+   * so the MENU can scroll naturally.
+   */
+  min-height: 100%;
+
+  width: 100%;
+
+  padding:
+    140px
+    8vw
+    80px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 80px;
+}
+
+
+    /* =====================================================
+       LEFT SIDE
+    ====================================================== */
+
+    .menu-left {
+      flex: 1;
+    }
+
+
+    /* =====================================================
+       SUBTITLE
+    ====================================================== */
+
+    .menu-subtitle {
+      margin-bottom: 32px;
+
+      color: #777777 !important;
+
+      font-size: 13px;
+
+      font-weight: 400;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.3em;
+    }
+
+
+    /* =====================================================
+       NAVIGATION LIST
+    ====================================================== */
+
+    .menu-list {
+      list-style: none;
+
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .menu-list li {
+      overflow: hidden;
+
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* =====================================================
+       NAVIGATION LINKS
+
+       IMPORTANT:
+       Custom CSS + !important ensures the links
+       remain WHITE even if Tailwind or another
+       stylesheet overrides them.
+    ====================================================== */
+
+    .menu-link {
+      display: inline-block !important;
+
+      color: #ffffff !important;
+
+      background: transparent !important;
+
+      text-decoration: none !important;
+
+      font-size:
+        clamp(
+          48px,
+          7vw,
+          110px
+        ) !important;
+
+      line-height: 0.94 !important;
+
+      font-weight: 700 !important;
+
+      letter-spacing: -0.05em !important;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease !important;
+    }
+
+
+    .menu-link:hover {
+      color: #cc896c !important;
+
+      transform:
+        translateX(12px);
+    }
+
+
+    /* =====================================================
+       RIGHT SIDE
+    ====================================================== */
+
+    .menu-right {
+      width: 270px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 50px;
+    }
+
+
+    /* =====================================================
+       RIGHT SIDE LABELS
+    ====================================================== */
+
+    .menu-right-title {
+      margin: 0 0 14px;
+
+      color: #777777 !important;
+
+      font-size: 12px;
+
+      font-weight: 400;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.3em;
+    }
+
+
+    /* =====================================================
+       CONTACT LINKS
+    ====================================================== */
+
+    .menu-contact-link {
+      display: block;
+
+      color: #ffffff !important;
+
+      text-decoration: none !important;
+
+      font-size: 20px;
+
+      line-height: 1.5;
+
+      transition:
+        color 0.3s ease;
+    }
+
+
+    .menu-contact-link:hover {
+      color: #cc896c !important;
+    }
+
+
+    /* =====================================================
+       SOCIAL LINKS
+    ====================================================== */
+
+    .menu-social {
+      display: flex;
+
+      gap: 24px;
+    }
+
+
+    .menu-social-link {
+      color: #ffffff !important;
+
+      text-decoration: none !important;
+
+      font-size: 15px;
+
+      transition:
+        color 0.3s ease;
+    }
+
+
+    .menu-social-link:hover {
+      color: #cc896c !important;
+    }
+
+
+    /* =====================================================
+       MOBILE LOGIN
+    ====================================================== */
+
+    .mobile-login {
+      display: none;
+
+      width: fit-content;
+
+      padding:
+        12px 22px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.3);
+
+      border-radius: 999px;
+
+      color: #ffffff !important;
+
+      text-decoration: none !important;
+
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ====================================================== */
+
+    @media (max-width: 991px) {
+
+      .site-header {
+        padding:
+          20px
+          28px;
+      }
+
+
+      .menu-inner {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: center;
+
+        padding:
+          130px
+          7vw
+          60px;
+
+        gap: 60px;
+      }
+
+
+      .menu-link {
+        font-size: 58px !important;
+      }
+
+
+      .menu-right {
+        width: auto;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+
+        gap: 50px;
+      }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (max-width: 640px) {
+
+      .site-header {
+        padding:
+          18px
+          20px;
+      }
+
+
+      .logo-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+
+      .logo-text {
+        font-size: 14px;
+      }
+
+
+      .header-actions {
+        gap: 10px;
+      }
+
+
+      .login-button {
+        display: none;
+      }
+
+
+      .menu-toggle {
+        width: 48px;
+        height: 48px;
+      }
+
+
+      .menu-inner {
+        padding:
+          120px
+          24px
+          50px;
+
+        gap: 55px;
+      }
+
+
+      .menu-subtitle {
+        margin-bottom: 25px;
+
+        font-size: 11px;
+      }
+
+
+      .menu-link {
+        font-size: 47px !important;
+
+        letter-spacing:
+          -0.045em !important;
+      }
+
+
+      .menu-right {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 30px;
+      }
+
+
+      .menu-contact-link {
+        font-size: 17px;
+      }
+
+
+      .mobile-login {
+        display: inline-flex;
+      }
+
+    }
+
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background: #ffffff;
+
+  color: #111111;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  background: #f5f4f1;
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+
+  padding:
+    80px 6vw
+    0;
+}
+
+
+/* =====================================================
+   HERO TITLE
+===================================================== */
+
+.hero-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      80px,
+      16vw,
+      250px
+    );
+
+  line-height: 0.78;
+
+  letter-spacing: -0.075em;
+
+  font-weight: 700;
+}
+
+
+.hero-word {
+  display: block;
+
+  overflow: hidden;
+}
+
+
+.hero-word-inner {
+  display: inline-block;
+}
+
+
+/* =====================================================
+   DECORATIVE CIRCLE
+===================================================== */
+
+.hero-circle {
+  position: absolute;
+
+  width:
+    min(
+      45vw,
+      620px
+    );
+
+  height:
+    min(
+      45vw,
+      620px
+    );
+
+  right: -8vw;
+
+  top: 50%;
+
+  border:
+    1px solid
+    rgba(17, 17, 17, 0.15);
+
+  border-radius: 50%;
+
+  transform:
+    translateY(-50%);
+}
+
+
+.hero-circle::before {
+  content: "";
+
+  position: absolute;
+
+  width: 8px;
+
+  height: 8px;
+
+  background: #cc896c;
+
+  border-radius: 50%;
+
+  top: 18%;
+
+  left: 18%;
+}
+
+
+.hero-circle-inner {
+  position: absolute;
+
+  width: 65%;
+
+  height: 65%;
+
+  top: 17.5%;
+
+  left: 17.5%;
+
+  border:
+    1px solid
+    rgba(17, 17, 17, 0.08);
+
+  border-radius: 50%;
+}
+
+
+/* =====================================================
+   HORIZONTAL LINE
+===================================================== */
+
+.hero-line {
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  top: 50%;
+
+  height: 1px;
+
+  background:
+    rgba(17, 17, 17, 0.08);
+
+  transform-origin: left;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.hero-location {
+  position: absolute;
+
+  left: 6vw;
+
+  top: 24%;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3em;
+
+  color: #777777;
+}
+
+
+/* =====================================================
+   HERO DESCRIPTION
+===================================================== */
+
+.hero-description {
+  position: absolute;
+
+  right: 8vw;
+
+  bottom: 17%;
+
+  max-width: 280px;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
+  color: #555555;
+}
+
+
+/* =====================================================
+   EXPLORE BUTTON
+===================================================== */
+
+.explore-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #111111;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.15em;
+
+  border-bottom:
+    1px solid #111111;
+
+  padding-bottom: 8px;
+
+  transition:
+    gap 0.3s ease;
+}
+
+
+.explore-button:hover {
+  gap: 25px;
+}
+
+
+.explore-arrow {
+  font-size: 18px;
+
+  line-height: 0;
+}
+
+
+/* =====================================================
+   SCROLL INDICATOR
+===================================================== */
+
+.scroll-indicator {
+  position: absolute;
+
+  left: 6vw;
+
+  bottom: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.25em;
+
+  color: #777777;
+}
+
+
+.scroll-line {
+  width: 45px;
+
+  height: 1px;
+
+  background: #111111;
+}
+
+
+/* =====================================================
+   GENERAL SECTION
+===================================================== */
+
+.section {
+  padding:
+    140px 6vw;
+}
+
+
+.section-container {
+  max-width: 1280px;
+
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8rem;
+
+  align-items: start;
+}
+
+
+.section-number {
+  font-size: 11px;
+
+  color: #999999;
+
+  letter-spacing: 0.25em;
+
+  margin-bottom: 32px;
+}
+
+
+.section-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      50px,
+      7vw,
+      105px
+    );
+
+  line-height: 0.9;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 700;
+}
+
+
+.intro-content {
+  padding-top: 4rem;
+}
+
+
+.section-text {
+  max-width: 480px;
+
+  color: #666666;
+
+  line-height: 1.7;
+
+  font-size: 16px;
+}
+
+
+/* =====================================================
+   CITY CARDS
+===================================================== */
+
+.cities-section {
+  padding:
+    0 6vw
+    140px;
+}
+
+
+.cities-grid {
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+
+.city-card {
+  position: relative;
+
+  height: 500px;
+
+  overflow: hidden;
+
+  background: #e8e5df;
+
+  text-decoration: none;
+}
+
+
+.city-card::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65),
+      transparent 55%
+    );
+}
+
+
+.city-graphic {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.city-circle {
+  width: 250px;
+
+  height: 250px;
+
+  border:
+    1px solid
+    rgba(17, 17, 17, 0.18);
+
+  border-radius: 50%;
+
+  transition:
+    transform 0.7s ease;
+}
+
+
+.city-circle-small {
+  position: absolute;
+
+  width: 100px;
+
+  height: 100px;
+
+  border:
+    1px solid
+    rgba(17, 17, 17, 0.18);
+
+  border-radius: 50%;
+
+  transition:
+    transform 0.7s ease;
+}
+
+
+.city-card:hover .city-circle {
+  transform: scale(1.25);
+}
+
+
+.city-card:hover .city-circle-small {
+  transform: scale(1.5);
+}
+
+
+.city-card-content {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 30px;
+
+  bottom: 30px;
+
+  color: #ffffff;
+}
+
+
+.city-card-number {
+  font-size: 11px;
+
+  letter-spacing: 0.2em;
+
+  opacity: 0.7;
+}
+
+
+.city-card-title {
+  margin-top: 8px;
+
+  font-size: 42px;
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.final-section {
+  min-height: 70vh;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  padding:
+    100px 6vw;
+}
+
+
+.final-container {
+  max-width: 1280px;
+
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+
+.final-label {
+  margin-bottom: 32px;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3em;
+
+  color:
+    rgba(255, 255, 255, 0.4);
+}
+
+
+.final-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      60px,
+      10vw,
+      160px
+    );
+
+  line-height: 0.85;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 700;
+}
+
+
+.final-link-wrapper {
+  margin-top: 56px;
+}
+
+
+.final-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  padding-bottom: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.15em;
+
+  font-size: 12px;
+}
+
+
+.final-link span {
+  font-size: 20px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 991px) {
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+
+    gap: 3rem;
+  }
+
+
+  .intro-content {
+    padding-top: 0;
+  }
+
+
+  .cities-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .city-card:last-child {
+    grid-column: span 2;
+  }
+
+
+  .hero-description {
+    right: 5vw;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 640px) {
+
+  .hero {
+    min-height: 90vh;
+  }
+
+
+  .hero-title {
+    font-size: 24vw;
+  }
+
+
+  .hero-location {
+    left: 24px;
+
+    top: 18%;
+  }
+
+
+  .hero-description {
+    left: 24px;
+
+    right: auto;
+
+    bottom: 15%;
+
+    max-width: 260px;
+  }
+
+
+  .hero-circle {
+    width: 90vw;
+
+    height: 90vw;
+
+    right: -35vw;
+  }
+
+
+  .scroll-indicator {
+    left: 24px;
+
+    bottom: 25px;
+  }
+
+
+  .section {
+    padding:
+      90px 24px;
+  }
+
+
+  .cities-section {
+    padding:
+      0 24px
+      90px;
+  }
+
+
+  .cities-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .city-card:last-child {
+    grid-column: auto;
+  }
+
+
+  .city-card {
+    height: 400px;
+  }
+
+
+  .final-section {
+    padding:
+      90px 24px;
+  }
+
+}
+
