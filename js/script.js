@@ -796,3 +796,13 @@ gsap.from(".final-link-wrapper", {
 
 });
 
+
+const headerInner = document.querySelector('.site-header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        headerInner.classList.add('scrolled');
+    } else {
+        headerInner.classList.remove('scrolled');
+    }
+});
