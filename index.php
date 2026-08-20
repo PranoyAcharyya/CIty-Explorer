@@ -81,13 +81,7 @@ require __DIR__ . '/Views/layout/header.php';
 
 
 
-echo "# CIty-Explorer" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/PranoyAcharyya/CIty-Explorer.git
-git push -u origin main
+
 <?php
 
 require __DIR__ . '/Views/layout/footer.php';
